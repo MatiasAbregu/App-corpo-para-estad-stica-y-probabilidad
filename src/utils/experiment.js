@@ -1,7 +1,7 @@
 export class Experiment {
-    constructor() {
-        this.possibleEvents = {};
-        this.totalOutcomes = [];
+    constructor(outcomes = [], events = {}) {
+        this.totalOutcomes = outcomes;
+        this.possibleEvents = events;
     }
 
 setupDiceExperiment() {
