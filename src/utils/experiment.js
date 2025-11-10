@@ -20,11 +20,13 @@ runExperiment(selectedEventName) {
 
     const func = this.possibleEvents[selectedEventName];
     const success = func ? func(result) : false;
+    const possibleOutcomes = this.totalOutcomes.filter(x => func(x));
 
     return {
         event: selectedEventName,
         result: result,
-        success: success
+        success: success,
+        outcomes: possibleOutcomes
     };
 }
 
@@ -37,6 +39,26 @@ estimateProbability(eventName) {
 
     const favorable = this.totalOutcomes.filter(x => func(x)).length;
     return favorable / this.totalOutcomes.length;
+}
+
+classifyEvent(eventName) {
+    const func = this.possibleEvents[eventName];
+    if (!func) {
+        console.warn(`Event "${eventName}" not found.`);
+        return 0;
+    }
+
+    const favorable = this.totalOutcomes.filter(x => func(x)).length;
+
+    if (favorable === 1){
+        return "Simple";
+    } else if (favorable === this.totalOutcomes.length){
+        return "Seguro";
+    } else if (favorable >= 1){
+        return "Compuesto";
+    } else {
+        return "Imposible";
+    }
 }
 
 }

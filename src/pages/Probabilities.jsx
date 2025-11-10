@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Experiment } from "../utils/experiment";
+import '../styles/Probabilities.css'
 
 export const  Probabilities = () => {
     const [experiment, setExperiment] = useState(null);
@@ -14,18 +15,33 @@ export const  Probabilities = () => {
     }, []);
 
     const handleAddEvent = () => {
-      setEvents([...events, {name: "", condition: ""}]);
+      setEvents([...events, {name: "", operator: ">", condition: ""}]);
     };
 
     const handleCreateExperiment = () => {
       const outcomesArr = outcomes.split(",").map(x => x.trim());
 
       const eventsObj = {};
+
       events.forEach(ev => {
+        if (!ev.name || ev.value === undefined || !ev.operator) return;
+
         try {
-          eventsObj[ev.name] = new Function("x", `return ${ev.condition}`);
-        } catch{
-          console.error("Error en condición:", ev.condition);
+          const val = isNaN(ev.value) ? ev.value : Number(ev.value);
+
+          eventsObj[ev.name] = (x) => {
+            const numX = isNaN(x) ? x : Number(x);
+            switch (ev.operator) {
+              case ">": return numX > val;
+              case "<": return numX < val;
+              case "==": return numX == val;
+              case ">=": return numX >= val;
+              case "<=": return numX <= val;
+              default: return false;
+            }
+          };
+        } catch (e) {
+          console.error("Error al crear evento:", ev.e)
         }
       });
 
@@ -43,11 +59,12 @@ export const  Probabilities = () => {
     }
 
     return (
-      <article>
+      <article className="probabilitiesPage">
         <h2>Simulador de experimentos</h2>
 
         <label>Espacio muestral (valores separados por coma):</label>
         <input 
+          className="outcomesInput"
           value={outcomes}
           onChange={(e) => setOutcomes(e.target.value)}
           placeholder="Ej: 1,2,3,4,5,6"
@@ -61,8 +78,9 @@ export const  Probabilities = () => {
         <p>Presione el botón crear experimento una vez ingresados todos los eventos</p>
         }
         {events.map((ev, i) => (
-          <div key={i}>
+          <div key={i} className="eventRow">
             <input 
+              className="eventName"
               placeholder="Nombre del evento"
               value={ev.name}
               onChange={(e) => {
@@ -71,33 +89,59 @@ export const  Probabilities = () => {
                 setEvents(copy);
               }}
             />
-            <input 
-              placeholder="Condición (ej:x > 4)"
-              value={ev.condition}
+            <div className="eventValue">
+            <span>x</span>
+            <select
+              value={ev.operator || ">"}
               onChange={(e) => {
                 const copy = [...events];
-                copy[i].condition = e.target.value;
+                copy[i].operator = e.target.value;
+                setEvents(copy);
+              }}
+            >
+              <option value=">">{">"}</option>
+              <option value="<">{"<"}</option>
+              <option value="==">{"="}</option>
+              <option value=">=">{">="}</option>
+              <option value="<=">{"<="}</option>
+            </select>
+
+            <input 
+              className="probInput"
+              placeholder="Valor"
+              value={ev.value ?? ""}
+              onChange={(e) => {
+                const copy = [...events];
+                copy[i].value = e.target.value;
                 setEvents(copy);
               }}
             />
-            <button onClick={() => {handleDeleteEvent(i)}}>X</button>
+
+            <button className="delButton" onClick={() => {handleDeleteEvent(i)}}>X</button>
+            </div>
           </div>
         ))}
 
-        <button onClick={handleAddEvent}>Agregar evento</button>
+        <div className="probButtonContainer">
+        <button className="probButton" onClick={handleAddEvent}>Agregar evento</button>
 
-        <button onClick={handleCreateExperiment}>Crear experimento</button>
+        <button className="probButton" onClick={handleCreateExperiment}>Crear experimento</button>
+        </div>
 
+        
         {experiment && (
           <>
             <h3>Ejecutar experimento</h3>
+            <div className="eventButtonContainer">
             {Object.keys(experiment.possibleEvents).map((evName) =>(
               <button key={evName} onClick={() => handleRun(evName)}>
                 {evName}
               </button>
             ))}
+            </div>
           </>
         )}
+        
 
         {result && (
           <div>
@@ -111,6 +155,15 @@ export const  Probabilities = () => {
             <p>
               Probabilidad teórica:{" "}
               {experiment.estimateProbability(result.event).toFixed(2)}
+            </p>
+            <p>
+              Espacio muestral: {"{ "}
+              {result.outcomes.join(", ")}
+              {" }"}
+            </p>
+            <p>
+              Tipo de evento: {" "}
+              {experiment.classifyEvent(result.event)}
             </p>
           </div>
         )}
