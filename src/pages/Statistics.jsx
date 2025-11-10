@@ -21,7 +21,6 @@ export const Statistics = () => {
 
     useEffect(() => {
         document.title = "Estadísticas";
-        setModal(true);
     }, []);
 
     useEffect(() => {
@@ -88,7 +87,13 @@ export const Statistics = () => {
                     <label htmlFor="">Ingrese el nombre de la categoría que graficará:</label>
                     <input type="text" value={titleGraph} onChange={e => setTitleGraph(e.target.value)} />
                 </div>
-                <button type="button" onClick={() => setModal(true)}>Editar datos</button>
+                <div className="buttonsControl">
+                    <button type="button" onClick={() => setModal(true)}>Editar datos</button>
+                    <span class="material-symbols-outlined" onClick={() => {
+                        setData([]);
+                        setTitleGraph("");
+                    }}>cleaning_services</span>
+                </div>
             </div>
             <div className="graphContainer">
                 {
@@ -152,7 +157,7 @@ export const Statistics = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>{titleGraph}</th>
+                                    <th style={{ minWidth: "100px", width: "auto" }}>{titleGraph}</th>
                                     <th>Frecuencia Absoluta</th>
                                     <th>Frecuencia Absoluta Acumulada</th>
                                     <th>Frecuencia Relativa</th>
@@ -163,14 +168,14 @@ export const Statistics = () => {
                                 {
                                     data.map((value, i) => {
                                         frecAbsol += Number.parseFloat(value.value);
-                                        frecRelativeAcum += Number.parseFloat(Math.round((value.value * 100) / totalFrecAbsol));
+                                        frecRelativeAcum += Number.parseFloat(((value.value * 100) / totalFrecAbsol));
                                         return (
                                             <tr key={i}>
                                                 <td>{value.label}</td>
                                                 <td>{value.value}</td>
                                                 <td>{frecAbsol}</td>
-                                                <td>{Math.round((value.value * 100) / totalFrecAbsol)}%</td>
-                                                <td>{frecRelativeAcum}%</td>
+                                                <td>{((value.value * 100) / totalFrecAbsol).toFixed(2)}%</td>
+                                                <td>{frecRelativeAcum.toFixed(2)}%</td>
                                             </tr>);
                                     })
                                 }

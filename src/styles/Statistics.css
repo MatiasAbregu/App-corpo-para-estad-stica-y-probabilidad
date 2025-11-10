@@ -145,7 +145,16 @@
     color: white;
 }
 
-.statisticsPage .controlContainer button {
+.statisticsPage .controlContainer .buttonsControl {
+    display: flex;
+}
+
+.statisticsPage .controlContainer .buttonsControl button {
+    flex: 1;
+}
+
+.statisticsPage .controlContainer button, 
+.statisticsPage .controlContainer .buttonsControl span {
     font-size: 1rem;
     font-weight: 600;
     background-color: #1a1919;
@@ -157,7 +166,16 @@
     transition: all .3s ease;
 }
 
-.statisticsPage .controlContainer button:hover {
+.statisticsPage .controlContainer .buttonsControl span {
+    background-color: #3177af;
+    color: white;
+    font-weight: 100;
+    padding: 3% 4%;
+    margin-left: 1%;
+}
+
+.statisticsPage .controlContainer button:hover,
+.statisticsPage .controlContainer .buttonsControl span:hover {
     background-color: #464646;
     cursor: pointer;
 }
