@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { MenuButton } from "../components/MenuButton";
+import '../styles/Menu.css';
 
 export const  Menu = () => {
     

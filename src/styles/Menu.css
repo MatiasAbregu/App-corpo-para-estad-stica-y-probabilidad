@@ -1,0 +1,21 @@
+.menuPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #272424;
+}
+
+.buttonContainer {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menuPage h2 {
+    text-align: center;
+    color: white; 
+}

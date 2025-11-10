@@ -1,22 +1,24 @@
 .menuButton {
     width: 100%;
-    margin: 3%;
+    margin: 5% 0;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     background-color: rgb(26, 25, 25);
     color: rgb(49, 119, 175);
-    font-size: 1rem;
+    font-size: 1.2rem;
     border-radius: 5vh;
-    padding: 5%;
+    padding: 5% 10%;
     transition: all .3s ease;
     text-align: center;
+    text-decoration: none;
 }
 
 .menuButton img {
-    max-width: 60px;
-    height: auto;
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
 }
 
 .menuButton:hover{

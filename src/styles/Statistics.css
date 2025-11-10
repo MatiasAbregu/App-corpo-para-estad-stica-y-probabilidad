@@ -1,0 +1,178 @@
+.statisticsPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #272424;
+    min-height: 100vh;
+    overflow-y: var(--overflowValue);
+}
+
+.statisticsPage .graphContainer,
+.statisticsPage .tableContainer {
+    display: flex;
+    width: 98%;
+    margin: 2% 1%;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 2px solid #3177af;
+    border-radius: 10px;
+    padding: 2% 0;
+}
+
+.statisticsPage .modalBack {
+    position: absolute;
+    background-color: #121212;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.statisticsPage .modalBack .leftContainer,
+.statisticsPage .modalBack .rigthContainer {
+    width: 48%;
+    margin: 0 1%;
+}
+
+.statisticsPage .modalBack .rigthContainer {
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.statisticsPage .modalBack .inputModal,
+.statisticsPage .controlContainer .inputModal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 4%;
+}
+
+.statisticsPage .modalBack .inputModal label,
+.statisticsPage .controlContainer .inputModal label {
+    margin-bottom: 1%;
+}
+
+.statisticsPage .modalBack .inputModal input[type="text"],
+.statisticsPage .modalBack .inputModal input[type="number"],
+.statisticsPage .controlContainer .inputModal input[type="text"] {
+    border-radius: 5px;
+    border: none;
+    padding: 2% 1%;
+    outline: none;
+    font-size: 1rem;
+}
+
+.statisticsPage .modalBack .buttonContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.statisticsPage .modalBack .buttonContainer button {
+    border: none;
+    padding: 2% 8%;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all .4s ease;
+    font-weight: 600;
+}
+
+.statisticsPage .modalBack .buttonContainer button:nth-child(1) {
+    background-color: #c52626;
+}
+
+.statisticsPage .modalBack .buttonContainer button:nth-child(1):hover {
+    color: #c52626;
+    background-color: white;
+}
+
+.statisticsPage .modalBack .buttonContainer button:nth-child(2) {
+    background-color: #24c01c;
+}
+
+.statisticsPage .modalBack .buttonContainer button:nth-child(2):hover {
+    color: #24c01c;
+    background-color: white;
+}
+
+.statisticsPage .modalBack .data-box {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 0 15px;
+}
+
+.statisticsPage .modalBack .data-box div {
+    display: flex;
+    align-items: center;
+    gap: 0 15px;
+}
+
+.statisticsPage .modalBack .box-color {
+    border: 1px solid white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.deleteData {
+    cursor: pointer;
+    padding: 1% 2%;
+    border-radius: 100%;
+    transition: all .3s ease;
+}
+
+.deleteData:hover {
+    background-color: #c52626;
+    color: white;
+}
+
+.statisticsPage .controlContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.statisticsPage .controlContainer .inputModal {
+    color: white;
+}
+
+.statisticsPage .controlContainer button {
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #1a1919;
+    color: #3177af;
+    border-radius: 5vh;
+    border: none;
+    padding: 3% 0;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.statisticsPage .controlContainer button:hover {
+    background-color: #464646;
+    cursor: pointer;
+}
+
+.statisticsPage .tableContainer table {
+    text-align: center;
+    color: #3177af;
+}
+
+.statisticsPage .tableContainer table thead th {
+    background: linear-gradient(90deg, #464646, #292929);
+    padding: 1%;
+}
+
+.statisticsPage .tableContainer table tbody td {
+    background-color: rgb(212, 212, 212);
+    padding: 1%;
+}
