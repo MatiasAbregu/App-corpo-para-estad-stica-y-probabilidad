@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { BackButton } from '../components/BackButton'
 import { Experiment } from "../utils/experiment";
 import '../styles/Probabilities.css'
 
@@ -60,6 +60,7 @@ export const  Probabilities = () => {
 
     return (
       <article className="probabilitiesPage">
+        <BackButton url={"/"} />
         <h2>Simulador de experimentos</h2>
 
         <label>Espacio muestral (valores separados por coma):</label>

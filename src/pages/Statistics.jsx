@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Doughnut, Bar, Pie } from "react-chartjs-2";
 import '../styles/Statistics.css'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title } from 'chart.js';
+import { BackButton } from "../components/BackButton";
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
 
@@ -82,6 +83,7 @@ export const Statistics = () => {
                         </div>
                     </div> : undefined
             }
+            <BackButton url={"/"} />
             <div className="controlContainer">
                 <div className="inputModal">
                     <label htmlFor="">Ingrese el nombre de la categoría que graficará:</label>
